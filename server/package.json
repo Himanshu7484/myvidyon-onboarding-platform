@@ -1,0 +1,34 @@
+{
+  "name": "myvidyon-onboarding-platform",
+  "version": "1.0.0",
+  "description": "A step-by-step onboarding portal that guides new students and institutions through sign-up, document upload, and validation, with an embedded AI assistant.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Himanshu7484/myvidyon-onboarding-platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Himanshu7484/myvidyon-onboarding-platform/issues"
+  },
+  "homepage": "https://github.com/Himanshu7484/myvidyon-onboarding-platform#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
