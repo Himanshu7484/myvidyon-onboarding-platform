@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  INSTITUTION
+  ADMIN
+}
+
+enum OnboardingStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  SUBMITTED
+  APPROVED
+  REJECTED
+}
+
+enum StepStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum ValidationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+model User {
+  id               Int              @id @default(autoincrement())
+  name             String
+  email            String           @unique
+  passwordHash     String
+  role             Role             @default(STUDENT)
+  onboardingStatus OnboardingStatus @default(NOT_STARTED)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  steps     OnboardingStep[]
+  documents Document[]
+}
+
+model OnboardingStep {
+  id          Int        @id @default(autoincrement())
+  userId      Int
+  stepName    String
+  status      StepStatus @default(PENDING)
+  completedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, stepName])
+}
+
+model Document {
+  id               Int              @id @default(autoincrement())
+  userId           Int
+  type             String
+  originalName     String
+  filePath         String
+  validationStatus ValidationStatus @default(PENDING)
+  validationNotes  String?
+  uploadedAt       DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
