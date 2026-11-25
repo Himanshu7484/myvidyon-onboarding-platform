@@ -4,10 +4,10 @@ A step-by-step onboarding portal that guides new students and institutions
 through sign-up, document upload, and validation, with an embedded AI assistant.
 
 ## Tech Stack
+- Frontend: React (Vite), React Router
 - Backend: Node.js, Express.js
 - Database: PostgreSQL + Prisma ORM
 - Authentication: JWT (jsonwebtoken) and bcryptjs
-- Frontend: React (coming later)
 - AI: LLM-powered assistant (coming later)
 
 ## Setup (Backend)
@@ -29,6 +29,27 @@ through sign-up, document upload, and validation, with an embedded AI assistant.
    ```
 7. Open http://localhost:5001/api/health
 
+## Setup (Frontend)
+1. In a second terminal tab, run:
+   ```bash
+   cd client
+   npm install
+   npm run dev
+   ```
+2. Open http://localhost:5173
+3. The backend must be running on port 5001 at the same time
+
+## Frontend Pages
+
+| Address | Login needed | What it shows |
+|---|---|---|
+| `/` | No | Home page with links |
+| `/register` | No | Sign-up form (student or institution) |
+| `/login` | No | Login form, then goes to the dashboard |
+| `/dashboard` | Yes | The logged-in user's details and a Logout button |
+
+The login token is saved in the browser, and `/dashboard` redirects to `/login` if there is no valid token.
+
 ## API Endpoints
 
 | Method | Address | Login needed | What it does |
@@ -40,20 +61,10 @@ through sign-up, document upload, and validation, with an embedded AI assistant.
 
 For protected routes, send the header `Authorization: Bearer <token>`.
 
-Example sign-up body:
-```json
-{
-  "name": "Test Student",
-  "email": "student1@example.com",
-  "password": "Test@12345",
-  "role": "STUDENT"
-}
-```
-
 ## Project Status
 - [x] Phase 1: Backend foundation (Express server, PostgreSQL, Prisma schema)
 - [x] Phase 2: Authentication (register, login, protected route)
-- [ ] Phase 3: Frontend
+- [x] Phase 3: Frontend (register, login, protected dashboard)
 - [ ] Phase 4: Onboarding steps
 - [ ] Phase 5: Document upload
 - [ ] Phase 6: Document validation
