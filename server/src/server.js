@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const prisma = require('./config/db');
 const authRoutes = require('./routes/auth.routes');
+const onboardingRoutes = require('./routes/onboarding.routes');
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/onboarding', onboardingRoutes);
 
 // Health check: tests the server AND the database
 app.get('/api/health', async (req, res) => {

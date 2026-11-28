@@ -45,6 +45,14 @@ function Dashboard() {
         <p><strong>Account type:</strong> {user.role}</p>
         <p><strong>Onboarding status:</strong> {user.onboardingStatus}</p>
 
+        {user.role !== 'ADMIN' && (
+          <button onClick={() => navigate('/onboarding')}>
+            {user.onboardingStatus === 'NOT_STARTED'
+              ? 'Start onboarding'
+              : 'Continue onboarding'}
+          </button>
+        )}
+
         <button onClick={handleLogout}>Logout</button>
       </div>
     </div>
